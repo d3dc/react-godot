@@ -1,11 +1,11 @@
 {
-  "name": "react-loadable",
-  "version": "5.4.0",
-  "description": "A higher order component for loading components with promises",
+  "name": "react-godot",
+  "version": "0.0.1",
+  "description": "A component that loads the Godot Engine",
   "main": "lib/index.js",
-  "author": "James Kyle <me@thejameskyle.com>",
+  "author": "Sam Richard <me@d3dc.io>",
   "license": "MIT",
-  "repository": "thejameskyle/react-loadable",
+  "repository": "d3dc/react-godot",
   "files": [
     "babel.js",
     "webpack.js",
@@ -14,7 +14,6 @@
   "scripts": {
     "test": "jest --coverage",
     "build": "babel src -d lib",
-    "start": "yarn build && webpack && babel-node example/server.js",
     "prepublish": "yarn build"
   },
   "dependencies": {

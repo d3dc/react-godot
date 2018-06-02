@@ -1,9 +1,8 @@
-const path = require('path');
-const { ReactLoadablePlugin } = require('./webpack');
+const path = require('path')
 
 module.exports = {
   entry: {
-    main: './example/client',
+    main: './example/client'
   },
   output: {
     path: path.join(__dirname, 'example', 'dist'),
@@ -22,28 +21,28 @@ module.exports = {
             babelrc: false,
             presets: [
               ['es2015', { modules: false }],
-              'react',
+              'react'
             ],
             plugins: [
               'syntax-dynamic-import',
               'transform-class-properties',
               'transform-object-assign',
-              require.resolve('./babel'),
-            ],
+              require.resolve('./babel')
+            ]
           }
-        },
-      },
-    ],
+        }
+      }
+    ]
   },
   devtool: 'inline-source-map',
   resolve: {
     alias: {
-      'react-loadable': path.resolve(__dirname, 'src'),
-    },
+      'react-loadable': path.resolve(__dirname, 'src')
+    }
   },
   plugins: [
     new ReactLoadablePlugin({
-      filename:  path.resolve(__dirname, 'example', 'dist', 'react-loadable.json'),
-    }),
+      filename: path.resolve(__dirname, 'example', 'dist', 'react-loadable.json')
+    })
   ]
-};
+}
