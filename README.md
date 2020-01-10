@@ -15,12 +15,12 @@ npm install --save react-godot
 ```tsx
 import * as React from 'react'
 
-import MyComponent from 'react-godot'
+import ReactGodot from 'react-godot'
 
 class Example extends React.Component {
   render () {
     return (
-      <MyComponent />
+      <ReactGodot script='/path/to/myGame.js' pck='/path/to/myGame.pck' />
     )
   }
 }
