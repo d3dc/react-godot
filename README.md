@@ -1,13 +1,31 @@
 # react-godot
-A React Component to asynchronously load the Godot Engine and bootstrap a .pak.
 
-Uses [react-loadable](https://github.com/jamiebuilds/react-loadable) component that first loads the Godot .wasm and then ties the progress from the engine's loading of your .pak file to the loader. Supports all Loadable options.
+> Load a webassembly build of the Godot engine and Bootstrap packed games from within the react component tree
 
+[![NPM](https://img.shields.io/npm/v/react-godot.svg)](https://www.npmjs.com/package/react-godot) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+
+## Install
+
+```bash
+npm install --save react-godot
 ```
-<GodotEngine
-  wasm={<path | Promise | () => Promise>}
-  pak={<path | Promise | () => Promise>}
-  resize={<boolean>}
-  params={<object>}
-/>
+
+## Usage
+
+```tsx
+import * as React from 'react'
+
+import MyComponent from 'react-godot'
+
+class Example extends React.Component {
+  render () {
+    return (
+      <MyComponent />
+    )
+  }
+}
 ```
+
+## License
+
+MIT © [d3dc](https://github.com/d3dc)
