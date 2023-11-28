@@ -13,18 +13,24 @@ npm install --save react-godot
 ## Usage
 
 ```tsx
-import * as React from 'react'
+import * as React from "react";
 
-import ReactGodot from 'react-godot'
+import ReactGodot from "react-godot";
 
 class Example extends React.Component {
-  render () {
+  render() {
     return (
-      <ReactGodot script='/path/to/myGame.js' pck='/path/to/myGame.pck' />
-    )
+      <ReactGodot
+        script="/path/to/myGame.js"
+        pck="/path/to/myGame.pck"
+        wasm="/path/to/myGame.wasm"
+      />
+    );
   }
 }
 ```
+
+Tested with HTML5 export from Godot 3.5.3 LTS.
 
 ## License
 

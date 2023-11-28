@@ -1,15 +1,15 @@
-import * as React from "react"
+import * as React from 'react'
 
-import { FunctionComponent, createContext, useContext, useReducer } from "react"
+import { FunctionComponent, createContext, useContext, useReducer } from 'react'
 
-export type PackLoadingState = {
+export interface PackLoadingState {
   mode: string
   initializing: boolean
   percent?: number
   msg?: string
 }
 
-export type PackLoadingAction = {
+export interface PackLoadingAction {
   msg?: string
   initialized?: boolean
   percent?: number
@@ -25,13 +25,13 @@ const packLoadingReducer = (
   if (!state.initializing) return state
 
   switch (action.mode) {
-    case "progress":
-    case "indeterminate":
-    case "notice":
-    case "hidden":
+    case 'progress':
+    case 'indeterminate':
+    case 'notice':
+    case 'hidden':
       break
     default:
-      throw new Error("Invalid status mode")
+      throw new Error('Invalid status mode')
   }
 
   const nextState = {
@@ -44,14 +44,14 @@ const packLoadingReducer = (
   return nextState
 }
 
-type LoadingProps = {
+interface LoadingProps {
   notice?: string
   percent?: number
   indeterminate: boolean
 }
 
 const LoadingContext = createContext<[PackLoadingState, PackLoadingDispatch]>([
-  { mode: "", initializing: true },
+  { mode: '', initializing: true },
   () => {}
 ])
 
@@ -63,28 +63,30 @@ const Loading: FunctionComponent<LoadingProps> = ({
   indeterminate = false
 }) => {
   return (
-    <div id="status">
-      {indeterminate ? (
-        <div id="status-indeterminate" onContextMenu={e => e.preventDefault()}>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-      ) : (
-        <div id="status-progress" onContextMenu={e => e.preventDefault()}>
-          <div
-            id="status-progress-inner"
-            style={{ width: percent + "%" }}
-          ></div>
-        </div>
-      )}
+    <div id='status'>
+      {indeterminate
+        ? (
+          <div id='status-indeterminate' onContextMenu={e => e.preventDefault()}>
+            <div />
+            <div />
+            <div />
+            <div />
+            <div />
+            <div />
+            <div />
+            <div />
+          </div>
+          )
+        : (
+          <div id='status-progress' onContextMenu={e => e.preventDefault()}>
+            <div
+              id='status-progress-inner'
+              style={{ width: percent + '%' }}
+            />
+          </div>
+          )}
       {notice && (
-        <div id="status-notice" className="godot">
+        <div id='status-notice' className='godot'>
           {notice}
         </div>
       )}
@@ -94,17 +96,17 @@ const Loading: FunctionComponent<LoadingProps> = ({
 
 const AsyncLoading: FunctionComponent = ({ children }) => {
   const [loadingState, dispatchLoadingAction] = useReducer(packLoadingReducer, {
-    mode: "indeterminate",
+    mode: 'indeterminate',
     initializing: true
   })
 
   return (
     <LoadingContext.Provider value={[loadingState, dispatchLoadingAction]}>
-      {loadingState.mode !== "hidden" && (
+      {loadingState.mode !== 'hidden' && (
         <Loading
           notice={loadingState.msg}
           percent={loadingState.percent}
-          indeterminate={loadingState.mode === "indeterminate"}
+          indeterminate={loadingState.mode === 'indeterminate'}
         />
       )}
       {children}

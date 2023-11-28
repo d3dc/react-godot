@@ -4,10 +4,10 @@
   "description": "Load a webassembly build of the Godot engine and Bootstrap packed games from within the react component tree",
   "author": "d3dc",
   "license": "MIT",
-  "repository": "d3dc/react-godot",
+  "repository": "github:d3dc/react-godot",
   "main": "dist/index.js",
-  "module": "dist/index.es.js",
-  "jsnext:main": "dist/index.es.js",
+  "module": "dist/index.js",
+  "jsnext:main": "dist/index.js",
   "types": "dist/index.d.ts",
   "engines": {
     "node": ">=8",
@@ -23,8 +23,8 @@
   },
   "dependencies": {},
   "peerDependencies": {
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0"
+    "react": "^16.12.0 || ^17 || ^18",
+    "react-dom": "^16.12.0 || ^17 || ^18"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^4.2.4",

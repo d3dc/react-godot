@@ -2,18 +2,20 @@
  * @function ReactGodot
  */
 
-import "./styles.css"
+import './styles.css'
 
-import * as React from "react"
+import * as React from 'react'
 
-import { FunctionComponent, useEffect, useRef, useState } from "react"
+import { FunctionComponent, useEffect, useRef, useState } from 'react'
 
-import AsyncLoading from "./AsyncLoading"
-import ReactCanvas from "./ReactCanvas"
+import AsyncLoading from './AsyncLoading'
+import ReactCanvas from './ReactCanvas'
 
-const useScript = (url, onLoad) => {
+import type { Engine, EngineLoaderDescription } from './typings'
+
+const useScript = (url: string, onLoad: () => void) => {
   useEffect(() => {
-    const script = document.createElement("script")
+    const script = document.createElement('script')
 
     script.src = url
     script.async = true
@@ -27,17 +29,18 @@ const useScript = (url, onLoad) => {
   }, [url])
 }
 
-export type ReactGodotProps = {
+export interface ReactGodotProps {
   script: EngineLoaderDescription
   pck: string
+  wasm?: string
   resize?: boolean
   width?: number
   height?: number
   params?: any
 }
 
-const ReactGodot: FunctionComponent<ReactGodotProps> = props => {
-  const { script, pck, resize = false, width, height, params } = props
+const ReactGodot: FunctionComponent<ReactGodotProps> = (props) => {
+  const { script, pck, wasm, resize = false, width, height, params } = props
   const outerRef = useRef<HTMLDivElement>(null)
   const [engine, setEngine] = useState<Engine>(null)
   const [dimensions, setDimensions] = useState([width, height])
@@ -48,7 +51,7 @@ const ReactGodot: FunctionComponent<ReactGodotProps> = props => {
   })
 
   useEffect(() => {
-    if (resize && outerRef.current) {
+    if (resize && (outerRef.current != null)) {
       setDimensions([
         outerRef.current.clientWidth,
         outerRef.current.clientHeight
@@ -57,12 +60,13 @@ const ReactGodot: FunctionComponent<ReactGodotProps> = props => {
   }, [resize, outerRef.current])
 
   return (
-    <div id="wrap" ref={outerRef}>
+    <div id='wrap' ref={outerRef}>
       <AsyncLoading>
         {engine && (
           <ReactCanvas
             pck={pck}
             engine={engine}
+            wasm={wasm}
             width={dimensions[0]}
             height={dimensions[1]}
             params={params}
